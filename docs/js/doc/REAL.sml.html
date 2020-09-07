@@ -1,0 +1,123 @@
+<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='width:100%; margin-right:20px;'></input></p><hr /><h4>Signature <tt>REAL</tt></h4><p> Operations on floating point values.</p>The REAL signature specifies structures that implement floating-point
+numbers. The semantics of floating-point numbers should follow the
+IEEE standard 754-1985 and the ANSI/IEEE standard 854-1987. In
+addition, implementations of the REAL signature are required to use
+non-trapping semantics. Additional aspects of the design of the REAL
+and MATH signatures were guided by the Floating-Point C Extensions
+developed by the X3J11 ANSI committee and the lecture notes by
+W. Kahan on the IEEE standard 754.
+
+Although there can be many representations for NaN values, the Library
+models them as a single value and currently provides no explicit way
+to distinguish among them, ignoring the sign bit. Thus, in the
+descriptions below and in the Math structure, we just refer to the NaN
+value.
+<hr /><pre><b>structure Real : REAL
+</b></pre><hr /><pre><b>signature</b> REAL = <b>sig</b>
+  <b>type</b> real = real
+
+  <b>structure</b> Math : MATH
+
+  <b>val</b> <a href='#$10'>~</a>    : real -> real
+  <b>val</b> <a href='#$08'>+</a>    : real * real -> real
+  <b>val</b> <a href='#$06'>-</a>    : real * real -> real
+  <b>val</b> <a href='#*'>*</a>    : real * real -> real
+  <b>val</b> <a href='#$03'>/</a>    : real * real -> real
+  <b>val</b> <a href='#abs'>abs</a>  : real -> real
+  <b>val</b> <a href='#min'>min</a>  : real * real -> real
+  <b>val</b> <a href='#max'>max</a>  : real * real -> real
+  <b>val</b> <a href='#sign'>sign</a> : real -> int
+  <b>val</b> <a href='#compare'>compare</a> : real * real -> order
+
+  <b>val</b> <a href='#sameSign'>sameSign</a>    : real * real -> bool
+  <b>val</b> <a href='#toDefault'>toDefault</a>   : real -> real
+  <b>val</b> <a href='#fromDefault'>fromDefault</a> : real -> real
+  <b>val</b> <a href='#fromInt'>fromInt</a>     : int -> real
+
+  <b>val</b> <a href='#floor'>floor</a> : real -> int
+  <b>val</b> <a href='#ceil'>ceil</a>  : real -> int
+  <b>val</b> <a href='#trunc'>trunc</a> : real -> int
+  <b>val</b> <a href='#round'>round</a> : real -> int
+
+  <b>val</b> <a href='#isNan'>isNan</a> : real -> bool
+  <b>val</b> <a href='#isFinite'>isFinite</a> : real -> bool
+  <b>val</b> <a href='#posInf'>posInf</a> : real
+  <b>val</b> <a href='#negInf'>negInf</a> : real
+
+  <b>val</b> <a href='#$05'>></a>    : real * real -> bool
+  <b>val</b> <a href='#$05$16'>>=</a>   : real * real -> bool
+  <b>val</b> <a href='#$04'><</a>    : real * real -> bool
+  <b>val</b> <a href='#$04$16'><=</a>   : real * real -> bool
+  <b>val</b> <a href='#$16$16'>==</a>   : real * real -> bool
+  <b>val</b> <a href='#$13$16'>!=</a>   : real * real -> bool
+
+  <b>val</b> <a href='#toString'>toString</a>   : real -> string
+  <b>val</b> <a href='#fromString'>fromString</a> : string -> real option
+  <b>val</b> <a href='#scan'>scan</a>       : (char, 'a) <a href='StringCvt.sml.html#$SStringCvt'>StringCvt</a>.<a href='StringCvt.sml.html#$Treader'>reader</a> -> (real, 'a) <a href='StringCvt.sml.html#$SStringCvt'>StringCvt</a>.<a href='StringCvt.sml.html#$Treader'>reader</a>
+  <b>val</b> <a href='#fmt'>fmt</a>        : <a href='StringCvt.sml.html#$SStringCvt'>StringCvt</a>.<a href='StringCvt.sml.html#$Trealfmt'>realfmt</a> -> real -> string
+<b>end</b></pre><hr /><dl><dt><b>[<tt><a name='$10'>~ x</a></tt>]</b></dt> <dd>returns the negation of x.
+</dd><br /><dt><b>[<tt><a name='*'>x * y</a></tt>]</b></dt> <dd>returns the product of x and y.
+</dd><br /><dt><b>[<tt><a name='$03'>x / y</a></tt>]</b></dt> <dd>returns the division of x by y.
+</dd><br /><dt><b>[<tt><a name='$08'>x + y</a></tt>]</b></dt> <dd>returns the sum of x and y.
+</dd><br /><dt><b>[<tt><a name='$06'>x - y</a></tt>]</b></dt> <dd>returns the difference between x and y.
+</dd><br /><dt><b>[<tt><a name='$05'>x &gt; y</a></tt>]</b></dt> <dd>returns true if x is strictly larger than y. Returns false
+otherwise.
+</dd><br /><dt><b>[<tt><a name='$05$16'>x &gt;= y</a></tt>]</b></dt> <dd>returns true if x is larger than or equal to y. Returns false
+otherwise.
+</dd><br /><dt><b>[<tt><a name='$04'>x &lt; y</a></tt>]</b></dt> <dd>returns true if x is strictly smaller than y. Returns false
+otherwise.
+</dd><br /><dt><b>[<tt><a name='$04$16'>x &lt;= y</a></tt>]</b></dt> <dd>returns true if x is smaller than or equal to y. Returns
+false otherwise.
+</dd><br /><dt><b>[<tt><a name='$10'>~ x</a></tt>]</b></dt> <dd>returns the absolute value of x.
+</dd><br /><dt><b>[<tt><a name='min'>min(x, y)</a></tt>]</b></dt> <dd>is the smaller of x and y.
+</dd><br /><dt><b>[<tt><a name='max'>max(x, y)</a></tt>]</b></dt> <dd>is the larger of x and y.
+</dd><br /><dt><b>[<tt><a name='sign'>sign x</a></tt>]</b></dt> <dd>is ~1, 0, or 1, according to whether x is negative, zero, or
+positive.
+</dd><br /><dt><b>[<tt><a name='compare'>compare(x, y)</a></tt>]</b></dt> <dd>returns LESS, EQUAL, or GREATER, according as x is
+less than, equal to, or greater than y.
+</dd><br /><dt><b>[<tt><a name='sameSign'>sameSign(x, y)</a></tt>]</b></dt> <dd>is true iff sign x = sign y.
+</dd><br /><dt><b>[<tt><a name='toDefault'>toDefault x</a></tt>]</b></dt> <dd>is x.
+</dd><br /><dt><b>[<tt><a name='fromDefault'>fromDefault x</a></tt>]</b></dt> <dd>is x.
+</dd><br /><dt><b>[<tt><a name='fromInt'>fromInt i</a></tt>]</b></dt> <dd>is the floating-point number representing integer i.
+</dd><br /><dt><b>[<tt><a name='floor'>floor r</a></tt>]</b></dt> <dd>is the largest integer &lt;= r (rounds towards minus infinity).
+May raise Overflow.
+</dd><br /><dt><b>[<tt><a name='ceil'>ceil r</a></tt>]</b></dt> <dd>is the smallest integer &gt;= r (rounds towards plus infinity).
+May raise Overflow.
+</dd><br /><dt><b>[<tt><a name='trunc'>trunc r</a></tt>]</b></dt> <dd>is numerically largest integer between r and zero (rounds
+towards zero). May raise Overflow.
+</dd><br /><dt><b>[<tt><a name='round'>round r</a></tt>]</b></dt> <dd>is the integer nearest to r, using the default rounding
+mode.  NOTE: This isn't the required behaviour: it should round to
+nearest even integer in case of a tie.  May raise Overflow.
+</dd><br /><dt><b>[<tt><a name='fmt'>fmt spec r</a></tt>]</b></dt> <dd>returns a string representing r, in the format specified
+by spec.
+<pre>
+      spec          description                            C printf 
+      ---------------------------------------------------------------
+      SCI NONE      scientific,   6 digits after point       %e
+      SCI (SOME n)  scientific,   n digits after point       %.ne
+      FIX NONE      fixed-point,  6 digits after point       %f
+      FIX (SOME n)  fixed-point,  n digits after point       %.nf
+      GEN NONE      auto choice, 12 significant digits       %.12g
+</pre>
+
+</dd><br /><dt><b>[<tt><a name='toString'>toString r</a></tt>]</b></dt> <dd>returns a string representing r, with automatic choice of
+format according to the magnitude of r. Equivalent to (fmt (GEN NONE)
+r).
+</dd><br /><dt><b>[<tt><a name='fromString'>fromString s</a></tt>]</b></dt> <dd>returns SOME(r) if a floating-point numeral can be
+scanned from a prefix of string s, ignoring any initial whitespace;
+returns NONE otherwise.  The valid forms of floating-point numerals
+are described by
+<pre>
+	[+~-]?(([0-9]+(\.[0-9]+)?)|(\.[0-9]+))([eE][+~-]?[0-9]+)?
+</pre>
+
+</dd><br /><dt><b>[<tt><a name='scan'>scan getc charsrc</a></tt>]</b></dt> <dd>attempts to scan a floating-point number from the
+character source charsrc, using the accessor getc, and ignoring any
+initial whitespace.  If successful, it returns SOME(r, rest) where r
+is the number scanned, and rest is the unused part of the character
+source. The valid forms of floating-point numerals are described by
+<pre>
+	[+~-]?(([0-9]+(\.[0-9]+)?)|(\.[0-9]+))([eE][+~-]?[0-9]+)?
+</pre>
+
+</dd><br /></dl><hr /><i>Generated by SigDoc</i></body></html>

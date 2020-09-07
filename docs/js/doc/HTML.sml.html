@@ -1,0 +1,203 @@
+<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='width:100%; margin-right:20px;'></input></p><hr /><h4>Signature <tt>HTML</tt></h4><p> HTML combinators.</p>Combinators for constructing HTML elements. The library does not
+enforce that the generated HTML conforms to the definition of any HTML
+standard. It does, however, ensure that elements are wellformed.
+<hr /><pre><b>structure Html : HTML
+</b></pre><hr /><pre><b>signature</b> HTML = 
+  <b>sig</b>
+    <b>type</b> t                                 (* elements *)
+    <b>type</b> attrs = (string * string) list    (* attributes *)
+
+    (* General operations *)
+    <b>val</b> <a href='#$02'>&</a>        : t * t -> t
+    <b>val</b> <a href='#$15'>$</a>        : string -> t
+    <b>val</b> <a href='#seq'>seq</a>      : t list -> t
+    <b>val</b> <a href='#toString'>toString</a> : t -> string
+    <b>val</b> <a href='#comment'>comment</a>  : t -> t
+
+    (* HTML documents and headers *)
+    <b>val</b> <a href='#html'>html</a>     : t -> t
+    <b>val</b> <a href='#head'>head</a>     : t -> t
+    <b>val</b> <a href='#title'>title</a>    : t -> t
+    <b>val</b> <a href='#body'>body</a>     : t -> t
+    <b>val</b> <a href='#bodya'>bodya</a>    : attrs -> t -> t
+
+    (* HTML headings and vertical format *)                                 
+    <b>val</b> <a href='#h1'>h1</a>       : t -> t
+    <b>val</b> <a href='#h2'>h2</a>       : t -> t
+    <b>val</b> <a href='#h3'>h3</a>       : t -> t
+    <b>val</b> <a href='#h4'>h4</a>       : t -> t
+    <b>val</b> <a href='#h5'>h5</a>       : t -> t
+    <b>val</b> <a href='#h6'>h6</a>       : t -> t
+    <b>val</b> <a href='#h1a'>h1a</a>      : attrs -> t -> t
+    <b>val</b> <a href='#h2a'>h2a</a>      : attrs -> t -> t
+    <b>val</b> <a href='#h3a'>h3a</a>      : attrs -> t -> t
+    <b>val</b> <a href='#h4a'>h4a</a>      : attrs -> t -> t
+    <b>val</b> <a href='#h5a'>h5a</a>      : attrs -> t -> t
+    <b>val</b> <a href='#h6a'>h6a</a>      : attrs -> t -> t
+    <b>val</b> <a href='#p'>p</a>        : t -> t
+    <b>val</b> <a href='#pa'>pa</a>       : attrs -> t -> t
+    <b>val</b> <a href='#br'>br</a>       : t
+    <b>val</b> <a href='#bra'>bra</a>      : attrs -> t
+    <b>val</b> <a href='#hr'>hr</a>       : t
+    <b>val</b> <a href='#hra'>hra</a>      : attrs -> t
+
+    <b>val</b> <a href='#divi'>divi</a>        : t -> t
+    <b>val</b> <a href='#divia'>divia</a>       : attrs -> t -> t
+    <b>val</b> <a href='#span'>span</a>        : attrs -> t -> t
+    <b>val</b> <a href='#blockquote'>blockquote</a>  : t -> t
+    <b>val</b> <a href='#blockquotea'>blockquotea</a> : attrs -> t -> t
+    <b>val</b> <a href='#center'>center</a>      : t -> t
+    <b>val</b> <a href='#address'>address</a>     : t -> t
+    <b>val</b> <a href='#pre'>pre</a>         : t -> t
+
+    (* HTML anchors and hyperlinks *)
+    <b>val</b> <a href='#ahref'>ahref</a>    : string -> t -> t
+    <b>val</b> <a href='#ahrefa'>ahrefa</a>   : attrs -> string -> t -> t
+    <b>val</b> <a href='#aname'>aname</a>    : string -> t -> t
+
+    (* HTML text formats and style *)
+    <b>val</b> <a href='#em'>em</a>       : t -> t
+    <b>val</b> <a href='#strong'>strong</a>   : t -> t
+    <b>val</b> <a href='#tt'>tt</a>       : t -> t
+    <b>val</b> <a href='#sub'>sub</a>      : t -> t
+    <b>val</b> <a href='#sup'>sup</a>      : t -> t
+                                 
+    (* HTML lists *)
+    <b>val</b> <a href='#ul'>ul</a>       : t -> t
+    <b>val</b> <a href='#ula'>ula</a>      : attrs -> t -> t
+    <b>val</b> <a href='#ol'>ol</a>       : t -> t
+    <b>val</b> <a href='#ola'>ola</a>      : attrs -> t -> t
+    <b>val</b> <a href='#li'>li</a>       : t -> t
+    <b>val</b> <a href='#dl'>dl</a>       : t -> t
+    <b>val</b> <a href='#dla'>dla</a>      : attrs -> t -> t
+    <b>val</b> <a href='#dt'>dt</a>       : t -> t
+    <b>val</b> <a href='#dd'>dd</a>       : t -> t
+
+    (* HTML tables *)
+    <b>val</b> <a href='#table'>table</a>    : t -> t
+    <b>val</b> <a href='#tablea'>tablea</a>   : attrs -> t -> t
+    <b>val</b> <a href='#tr'>tr</a>       : t -> t
+    <b>val</b> <a href='#tra'>tra</a>      : attrs -> t -> t
+    <b>val</b> <a href='#td'>td</a>       : t -> t
+    <b>val</b> <a href='#tda'>tda</a>      : attrs -> t -> t
+    <b>val</b> <a href='#th'>th</a>       : t -> t
+    <b>val</b> <a href='#tha'>tha</a>      : attrs -> t -> t
+    <b>val</b> <a href='#caption'>caption</a>  : t -> t
+    <b>val</b> <a href='#captiona'>captiona</a> : attrs -> t -> t
+
+    (* HTML images and image maps *)
+    <b>val</b> <a href='#img'>img</a>      : string -> t
+    <b>val</b> <a href='#imga'>imga</a>     : attrs -> string -> t
+
+    (* HTML forms etc *)
+    <b>val</b> <a href='#form'>form</a>       : string -> t -> t
+    <b>val</b> <a href='#forma'>forma</a>      : attrs -> string -> t -> t
+    <b>val</b> <a href='#input'>input</a>      : string -> t
+    <b>val</b> <a href='#inputa'>inputa</a>     : string -> attrs -> t
+    <b>val</b> <a href='#intext'>intext</a>     : string -> attrs -> t
+    <b>val</b> <a href='#inpassword'>inpassword</a> : string -> attrs -> t
+    <b>val</b> <a href='#incheckbox'>incheckbox</a> : {name : string, value : string} -> attrs -> t
+    <b>val</b> <a href='#inradio'>inradio</a>    : {name : string, value : string} -> attrs -> t
+    <b>val</b> <a href='#inreset'>inreset</a>    : string -> attrs -> t
+    <b>val</b> <a href='#insubmit'>insubmit</a>   : string -> attrs -> t
+    <b>val</b> <a href='#inhidden'>inhidden</a>   : {name : string, value : string} -> t
+    <b>val</b> <a href='#textarea'>textarea</a>   : string -> t -> t
+    <b>val</b> <a href='#textareaa'>textareaa</a>  : string -> attrs -> t -> t
+    <b>val</b> <a href='#select'>select</a>     : string -> attrs -> t -> t
+    <b>val</b> <a href='#option'>option</a>     : string -> t
+                               
+    (* HTML encoding  *)
+    <b>val</b> <a href='#urlencode'>urlencode</a>  : string -> string
+    <b>val</b> <a href='#htmlencode'>htmlencode</a> : string -> string                          
+  <b>end</b></pre><hr /><dl><dt><b>[<tt>t</tt>]</b></dt> <dd>is the common type for holding elements of any kind. The
+implementation ensures that concatenation of elements using &amp; and seq
+is efficient. Constructing HTML, functionall, as a value of type t, is
+more efficient than building it (functionally) as a string, and more
+convenient and modular than building it (imperatively) by calling
+print.
+</dd><br /><dt><b>[<tt><a name='$15'>$ s</a></tt>]</b></dt> <dd>represents the string s.
+</dd><br /><dt><b>[<tt><a name='$02'>e1 &amp; e2</a></tt>]</b></dt> <dd>represents the concatenation of the elements represented by
+e1 and e2.  The function &amp; should be declared
+<pre>
+  infix &amp;
+</pre>
+
+</dd><br /><dt><b>[<tt><a name='toString'>toString e</a></tt>]</b></dt> <dd>returns the string represented by e.
+</dd><br /><dt><b>[<tt><a name='comment'>comment e</a></tt>]</b></dt> <dd>generates  the special element &lt;!--e--&gt;.
+</dd><br /><dt><b>[<tt><a name='html'>html e</a></tt>]</b></dt> <dd>generates &lt;html&gt;e&lt;/html&gt;.
+</dd><br /><dt><b>[<tt><a name='head'>head e</a></tt>]</b></dt> <dd>generates &lt;head&gt;e&lt;/head&gt;.
+</dd><br /><dt><b>[<tt><a name='title'>title e</a></tt>]</b></dt> <dd>generates &lt;title&gt;e&lt;/title&gt;.
+</dd><br /><dt><b>[<tt><a name='body'>body e</a></tt>]</b></dt> <dd>generates &lt;body&gt;e&lt;/body&gt;.
+</dd><br /><dt><b>[<tt><a name='bodya'>bodya attrs e</a></tt>]</b></dt> <dd>generates &lt;body attrs&gt;e&lt;/body&gt;.
+</dd><br /><dt><b>[<tt><a name='h1'>h1 e</a></tt>]</b></dt> <dd>generates &lt;h1&gt;e&lt;/h1&gt;.
+</dd><br /><dt><b>[<tt><a name='p'>p e</a></tt>]</b></dt> <dd>generates &lt;p&gt;e&lt;/p&gt;.
+</dd><br /><dt><b>[<tt><a name='pa'>pa attrs e</a></tt>]</b></dt> <dd>generates &lt;p attrs&gt;e&lt;/p&gt;.
+</dd><br /><dt><b>[<tt><a name='br'>br</a></tt>]</b></dt> <dd>generates &lt;br/&gt;.
+</dd><br /><dt><b>[<tt><a name='bra'>bra attrs</a></tt>]</b></dt> <dd>generates &lt;br attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='hr'>hr</a></tt>]</b></dt> <dd>generates &lt;hr/&gt;.
+</dd><br /><dt><b>[<tt><a name='hra'>hra attrs</a></tt>]</b></dt> <dd>generates &lt;hr attrs&gt;.
+</dd><br /><dt><b>[<tt><a name='divi'>divi e</a></tt>]</b></dt> <dd>generates &lt;div&gt;e&lt;/div&gt;.
+</dd><br /><dt><b>[<tt><a name='divia'>divia attrs e</a></tt>]</b></dt> <dd>generates &lt;div attrs&gt;e&lt;/div&gt;.
+</dd><br /><dt><b>[<tt><a name='span'>span attrs e</a></tt>]</b></dt> <dd>generates &lt;span attrs&gt;e&lt;/span&gt;
+</dd><br /><dt><b>[<tt><a name='blockquote'>blockquote e</a></tt>]</b></dt> <dd>generates &lt;blockquote&gt;e&lt;/blockquote&gt;.
+</dd><br /><dt><b>[<tt><a name='blockquotea'>blockquotea attrs e</a></tt>]</b></dt> <dd>generates &lt;blockquote attrs&gt;e&lt;/blockquote&gt; 
+</dd><br /><dt><b>[<tt><a name='center'>center e</a></tt>]</b></dt> <dd>generates &lt;center&gt;e&lt;/center&gt;.
+</dd><br /><dt><b>[<tt><a name='address'>address e</a></tt>]</b></dt> <dd>generates &lt;address&gt;e&lt;/address&gt;.
+</dd><br /><dt><b>[<tt><a name='pre'>pre e</a></tt>]</b></dt> <dd>generates &lt;pre&gt;e&lt;/pre&gt;.
+</dd><br /><dt><b>[<tt><a name='ahref'>ahref link e</a></tt>]</b></dt> <dd>generates &lt;a href='link'&gt;e&lt;/a&gt;.
+</dd><br /><dt><b>[<tt><a name='ahrefa'>ahrefa link attrs e</a></tt>]</b></dt> <dd>generates &lt;a href='link' attrs&gt;e&lt;/a&gt;.
+</dd><br /><dt><b>[<tt><a name='aname'>aname nam e</a></tt>]</b></dt> <dd>generates &lt;a name='name'&gt;e&lt;/a&gt;.
+</dd><br /><dt><b>[<tt><a name='em'>em e</a></tt>]</b></dt> <dd>generates &lt;em&gt;e&lt;/em&gt;.
+</dd><br /><dt><b>[<tt><a name='strong'>strong e</a></tt>]</b></dt> <dd>generates &lt;strong&gt;e&lt;/strong&gt;.
+</dd><br /><dt><b>[<tt><a name='tt'>tt e</a></tt>]</b></dt> <dd>generates &lt;tt&gt;e&lt;/tt&gt;.
+</dd><br /><dt><b>[<tt><a name='sub'>sub e</a></tt>]</b></dt> <dd>generates &lt;sub&gt;e&lt;/sub&gt;.
+</dd><br /><dt><b>[<tt><a name='sup'>sup e</a></tt>]</b></dt> <dd>generates &lt;sup&gt;e&lt;/sup&gt;.
+</dd><br /><dt><b>[<tt><a name='ul'>ul e</a></tt>]</b></dt> <dd>generates &lt;ul&gt;e&lt;/ul&gt;.
+</dd><br /><dt><b>[<tt><a name='ula'>ula attrs e</a></tt>]</b></dt> <dd>generates &lt;ul attrs&gt;e&lt;/ul&gt;.
+</dd><br /><dt><b>[<tt><a name='ol'>ol e</a></tt>]</b></dt> <dd>generates &lt;ol&gt;e&lt;/ol&gt;.
+</dd><br /><dt><b>[<tt><a name='ola'>ola attrs e</a></tt>]</b></dt> <dd>generates &lt;ol attrs&gt;e&lt;/ol&gt;.
+</dd><br /><dt><b>[<tt><a name='li'>li e</a></tt>]</b></dt> <dd>generates &lt;li&gt;e&lt;/li&gt;.
+</dd><br /><dt><b>[<tt><a name='dl'>dl e</a></tt>]</b></dt> <dd>generates &lt;dl&gt;e&lt;/dl&gt;.
+</dd><br /><dt><b>[<tt><a name='dla'>dla attrs e</a></tt>]</b></dt> <dd>generates &lt;dl attrs&gt;e&lt;/dl&gt;.
+</dd><br /><dt><b>[<tt><a name='dt'>dt e</a></tt>]</b></dt> <dd>generates &lt;dt&gt;e&lt;/dt&gt;.
+</dd><br /><dt><b>[<tt><a name='dd'>dd e</a></tt>]</b></dt> <dd>generates &lt;dd&gt;e&lt;/dd&gt;.
+</dd><br /><dt><b>[<tt><a name='table'>table e</a></tt>]</b></dt> <dd>generates &lt;table&gt;e&lt;/table&gt;.
+</dd><br /><dt><b>[<tt><a name='tablea'>tablea attrs e</a></tt>]</b></dt> <dd>generates &lt;table attrs&gt;e&lt;/table&gt;.
+</dd><br /><dt><b>[<tt><a name='tr'>tr e</a></tt>]</b></dt> <dd>generates &lt;tr&gt;e&lt;/tr&gt;.
+</dd><br /><dt><b>[<tt><a name='tra'>tra attrs e</a></tt>]</b></dt> <dd>generates &lt;tr attrs&gt;e&lt;/tr&gt;.
+</dd><br /><dt><b>[<tt><a name='td'>td e</a></tt>]</b></dt> <dd>generates &lt;td&gt;e&lt;/td&gt;.
+</dd><br /><dt><b>[<tt><a name='tda'>tda attrs e</a></tt>]</b></dt> <dd>generates &lt;td attrs&gt;e&lt;/td&gt;.
+</dd><br /><dt><b>[<tt><a name='th'>th e</a></tt>]</b></dt> <dd>generates &lt;th&gt;e&lt;/th&gt;.
+</dd><br /><dt><b>[<tt><a name='tha'>tha attrs e</a></tt>]</b></dt> <dd>generates &lt;th attrs&gt;e&lt;/th&gt;.
+</dd><br /><dt><b>[<tt><a name='caption'>caption e</a></tt>]</b></dt> <dd>generates &lt;caption&gt;e&lt;/caption&gt;.
+</dd><br /><dt><b>[<tt><a name='captiona'>captiona attrs e</a></tt>]</b></dt> <dd>generates &lt;caption attrs&gt;e&lt;/caption&gt;.
+</dd><br /><dt><b>[<tt><a name='img'>img s</a></tt>]</b></dt> <dd>generates &lt;img src='s'&gt;.
+</dd><br /><dt><b>[<tt><a name='imga'>imga s attrs</a></tt>]</b></dt> <dd>generates &lt;img src='s' attrs&gt;.
+</dd><br /><dt><b>[<tt><a name='form'>form act e</a></tt>]</b></dt> <dd>generates &lt;form action='act'&gt;e&lt;/form&gt;.
+</dd><br /><dt><b>[<tt><a name='forma'>forma act attrs e</a></tt>]</b></dt> <dd>generates &lt;form action='act' attrs&gt;e&lt;/form&gt;.
+</dd><br /><dt><b>[<tt><a name='input'>input typ</a></tt>]</b></dt> <dd>generates &lt;input type='typ'/&gt;.
+</dd><br /><dt><b>[<tt><a name='inputa'>inputa typ attrs</a></tt>]</b></dt> <dd>generates &lt;input type='typ' attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='intext'>intext name attrs</a></tt>]</b></dt> <dd>generates &lt;input type='text' name='name' attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='inpassword'>inpassword name attrs</a></tt>]</b></dt> <dd>generates &lt;input type='password' name='name'
+attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='incheckbox'>incheckbox {name, value} attrs</a></tt>]</b></dt> <dd>generates &lt;input type='checkbox'
+name='name' value='value' attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='inradio'>inradio {name, value} attrs</a></tt>]</b></dt> <dd>generates &lt;input type='radio'
+name='name' value='value' attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='inreset'>inreset value attrs</a></tt>]</b></dt> <dd>generates &lt;input type='reset' value='value' attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='insubmit'>insubmit value attrs</a></tt>]</b></dt> <dd>generates &lt;input type='submit' value='value' attrs/&gt;.
+</dd><br /><dt><b>[<tt><a name='inhidden'>inhidden {name, value}</a></tt>]</b></dt> <dd>generates &lt;input type='hidden' name='name'
+value='value'/&gt;.
+</dd><br /><dt><b>[<tt><a name='textarea'>textarea name e</a></tt>]</b></dt> <dd>generates &lt;textarea name='name'&gt;e&lt;/textarea&gt;.
+</dd><br /><dt><b>[<tt><a name='textareaa'>textareaa name attrs e</a></tt>]</b></dt> <dd>generates &lt;textarea name='name'
+attrs&gt;e&lt;/textarea&gt;.
+</dd><br /><dt><b>[<tt><a name='select'>select name attrs e</a></tt>]</b></dt> <dd>generates &lt;select name='name' attrs&gt;e&lt;/select&gt;.
+</dd><br /><dt><b>[<tt><a name='option'>option value</a></tt>]</b></dt> <dd>generates &lt;option value='value'/&gt;.
+</dd><br /><dt><b>[<tt><a name='urlencode'>urlencode s</a></tt>]</b></dt> <dd>returns the url-encoding of s.  That is, space (ASCII
+32) is replaced by `+' and every non-alphanumeric character c except
+the characters - _ . is replaced by %hh, where hh is the hexadecimal
+representation of the ASCII code of c.
+</dd><br /><dt><b>[<tt><a name='htmlencode'>htmlencode s</a></tt>]</b></dt> <dd>returns the html-encoding of s.  That is, &lt; and &gt;
+are replaced by &amp;lt; and &amp;gt; respectively, and &amp; is replaced by 
+&amp;amp;
+</dd><br /></dl><hr /><i>Generated by SigDoc</i></body></html>

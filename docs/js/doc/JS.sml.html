@@ -1,0 +1,114 @@
+<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='width:100%; margin-right:20px;'></input></p><hr /><h4>Signature <tt>JS</tt></h4><p> Basic Javascript and DOM operations.</p>Basic operations for accessing the DOM tree and basic JavaScript
+functionality.
+<hr /><pre><b>structure Js : JS
+</b></pre><hr /><pre><b>signature</b> JS =
+  <b>sig</b>
+    (* dom *)
+    <b>eqtype</b> win
+    <b>eqtype</b> doc
+    <b>eqtype</b> elem
+    <b>val</b> <a href='#window'>window</a>          : win
+    <b>val</b> <a href='#openWindow'>openWindow</a>      : string -> string -> string -> win
+    <b>val</b> <a href='#closeWindow'>closeWindow</a>     : win -> unit
+    <b>val</b> <a href='#windowDocument'>windowDocument</a>  : win -> doc
+    <b>val</b> <a href='#document'>document</a>        : doc
+    <b>val</b> <a href='#documentElement'>documentElement</a> : doc -> elem
+    <b>val</b> <a href='#documentWrite'>documentWrite</a>   : doc -> string -> unit
+    <b>val</b> <a href='#getElementById'>getElementById</a>  : doc -> string -> elem option
+    <b>val</b> <a href='#parent'>parent</a>          : elem -> elem option
+    <b>val</b> <a href='#firstChild'>firstChild</a>      : elem -> elem option
+    <b>val</b> <a href='#lastChild'>lastChild</a>       : elem -> elem option
+    <b>val</b> <a href='#nextSibling'>nextSibling</a>     : elem -> elem option
+    <b>val</b> <a href='#previousSibling'>previousSibling</a> : elem -> elem option
+    <b>val</b> <a href='#innerHTML'>innerHTML</a>       : elem -> string -> unit
+    <b>val</b> <a href='#value'>value</a>           : elem -> string
+    <b>val</b> <a href='#setAttribute'>setAttribute</a>    : elem -> string -> string -> unit
+    <b>val</b> <a href='#removeAttribute'>removeAttribute</a> : elem -> string -> unit
+    <b>val</b> <a href='#createElement'>createElement</a>   : string -> elem
+    <b>val</b> <a href='#createTextNode'>createTextNode</a>  : string -> elem
+    <b>val</b> <a href='#createFragment'>createFragment</a>  : unit -> elem
+    <b>val</b> <a href='#appendChild'>appendChild</a>     : elem -> elem -> unit
+    <b>val</b> <a href='#removeChild'>removeChild</a>     : elem -> elem -> unit
+    <b>val</b> <a href='#replaceChild'>replaceChild</a>    : elem -> elem -> elem -> unit
+
+    <b>type</b> ns (* name space *)
+    <b>val</b> <a href='#nsFromString'>nsFromString</a>    : string -> ns
+    <b>val</b> <a href='#createElementNS'>createElementNS</a> : ns -> string -> elem
+    <b>val</b> <a href='#setAttributeNS'>setAttributeNS</a>  : ns -> elem -> string -> string -> unit
+
+    (* events *)
+    <b>datatype</b> eventType = onclick | onchange | onkeypress
+                       | onkeyup | onmouseover | onmouseout
+    <b>val</b> <a href='#installEventHandler'>installEventHandler</a> : elem -> eventType -> (unit -> bool) -> unit
+    <b>val</b> <a href='#getEventHandler'>getEventHandler</a>     : elem -> eventType -> (unit -> bool) option
+    <b>val</b> <a href='#onMouseMove'>onMouseMove</a>         : doc -> (int*int -> unit) -> unit
+    <b>val</b> <a href='#onMouseMoveElem'>onMouseMoveElem</a>     : elem -> (int*int -> unit) -> unit
+
+    (* timers *)
+    <b>type</b> intervalId
+    <b>val</b> <a href='#setInterval'>setInterval</a>     : int -> (unit -> unit) -> intervalId
+    <b>val</b> <a href='#clearInterval'>clearInterval</a>   : intervalId -> unit
+
+    <b>type</b> timeoutId
+    <b>val</b> <a href='#setTimeout'>setTimeout</a>      : int -> (unit -> unit) -> timeoutId
+    <b>val</b> <a href='#clearTimeout'>clearTimeout</a>    : timeoutId -> unit
+
+    (* Cookies *)
+    <b>val</b> <a href='#setCookie'>setCookie</a>       : doc -> string -> unit
+    <b>val</b> <a href='#getCookie'>getCookie</a>       : doc -> string
+
+    (* styles *)
+    <b>val</b> <a href='#setStyle'>setStyle</a>        : elem -> string * string -> unit
+
+    (* Position *)
+    <b>val</b> <a href='#xElem'>xElem</a>           : elem -> int
+    <b>val</b> <a href='#yElem'>yElem</a>           : elem -> int
+
+    <b>structure</b> XMLHttpRequest : <b>sig</b>
+      <b>type</b> req
+      <b>val</b> <a href='#new'>new</a>              : unit -> req
+      <b>val</b> <a href='#openn'>openn</a>            : req -> {method: string, url: string, async: bool} -> unit
+      <b>val</b> <a href='#setRequestHeader'>setRequestHeader</a> : req -> string * string -> unit
+      <b>val</b> <a href='#setResponseType'>setResponseType</a>  : req -> string -> unit
+      <b>val</b> <a href='#send'>send</a>             : req -> string option -> unit
+      <b>val</b> <a href='#sendBinary'>sendBinary</a>       : req -> string -> unit
+      <b>val</b> <a href='#state'>state</a>            : req -> int        (* 0,1,2,3,4 *)
+      <b>val</b> <a href='#status'>status</a>           : req -> int option (* 200, 404, ... *)
+      <b>val</b> <a href='#onStateChange'>onStateChange</a>    : req -> (unit -> unit) -> unit
+      <b>val</b> <a href='#response'>response</a>         : req -> string option
+      <b>val</b> <a href='#responseArrBuf'>responseArrBuf</a>   : req -> string option
+      <b>val</b> <a href='#abort'>abort</a>            : req -> unit
+    <b>end</b>
+
+    <b>val</b> <a href='#random'>random</a>             : unit -> real
+
+    <b>val</b> <a href='#loadScript'>loadScript</a>         : string -> (unit -> unit) -> unit
+
+    (* Shorthand notation for creating elements *)
+    <b>structure</b> Element : <b>sig</b>
+      <b>val</b> <a href='#$15'>$</a>     : string -> elem
+      <b>val</b> <a href='#$02'>&</a>     : elem * elem -> elem
+      <b>val</b> <a href='#taga0'>taga0</a> : string -> (string*string)list -> elem
+      <b>val</b> <a href='#tag0'>tag0</a>  : string -> elem
+      <b>val</b> <a href='#tag'>tag</a>   : string -> elem -> elem
+      <b>val</b> <a href='#taga'>taga</a>  : string -> (string*string)list -> elem -> elem
+
+      <b>val</b> <a href='#nstaga0'>nstaga0</a> : ns -> string -> (string*string)list -> elem
+      <b>val</b> <a href='#nstag0'>nstag0</a>  : ns -> string -> elem
+      <b>val</b> <a href='#nstag'>nstag</a>   : ns -> string -> elem -> elem
+      <b>val</b> <a href='#nstaga'>nstaga</a>  : ns -> string -> (string*string)list -> elem -> elem
+
+      <b>val</b> <a href='#toForeignPtr'>toForeignPtr</a>   : elem -> foreignptr
+      <b>val</b> <a href='#fromForeignPtr'>fromForeignPtr</a> : foreignptr -> elem
+    <b>end</b>
+  <b>end</b></pre><hr /><dl><dt><b>[<tt><a name='parent'>parent e</a></tt>]</b></dt> <dd>returns SOME p, if p is the parent of e. Returns NONE if e
+has no parent.
+</dd><br /><dt><b>[<tt><a name='appendChild'>appendChild e child</a></tt>]</b></dt> <dd>appends child to e.
+</dd><br /><dt><b>[<tt><a name='removeChild'>removeChild e child</a></tt>]</b></dt> <dd>removes child from e.
+</dd><br /><dt><b>[<tt><a name='new'>replaceChild e new old</a></tt>]</b></dt> <dd>replaces old child from e with new child.
+</dd><br /><dt><b>[<tt><a name='random'>random()</a></tt>]</b></dt> <dd>returns a random real in the interval [0.0,1.0[.
+</dd><br /><dt><b>[<tt><a name='loadScript'>loadScript url callback</a></tt>]</b></dt> <dd>loads the JavaScript file specified by the
+url and execute the callback function once the script is fully
+loaded. The loadScript function assumes that a head element is present
+in the DOM.
+</dd><br /></dl><hr /><i>Generated by SigDoc</i></body></html>

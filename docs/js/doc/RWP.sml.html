@@ -1,0 +1,128 @@
+<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='width:100%; margin-right:20px;'></input></p><hr /><h4>Signature <tt>RWP</tt></h4><p> Reactive Web Programming Library. </p>Combinators for constructing reactive web programs. See 
+http://www.smlserver.org/smltojs/slides_diku_2007-11-27.pdf for an
+introduction to the use of the combinators.
+<hr /><pre><b>structure Rwp : RWP
+</b></pre><hr /><pre><b>signature</b> RWP =
+  <b>sig</b>
+    <b>eqtype</b> B <b>eqtype</b> E         (* Kinds: Behaviors (B) and Events (E) *)
+    <b>type</b> ('a,'k)t
+    <b>type</b> 'a b = ('a, B)t      (* Behaviors *)
+    <b>type</b> 'a e = ('a, E)t      (* Events *)
+
+    (* Arrow operations *)
+    <b>type</b> ('a,'b,'k)arr = ('a,'k)t -> ('b,'k)t
+    <b>val</b> <a href='#arr'>arr</a> : (''b -> ''c) -> (''b,''c,'k) arr
+    <b>val</b> <a href='#$05$05$05'>>>></a> : (''b,''c,'k)arr * (''c,''d,'k)arr -> (''b,''d,'k)arr
+    <b>val</b> <a href='#fst'>fst</a> : (''b,''c,'k)arr -> (''b*''d,''c*''d,'k)arr
+    <b>val</b> <a href='#snd'>snd</a> : (''b,''c,'k)arr -> (''d*''b,''d*''c,'k)arr
+    <b>val</b> <a href='#***'>***</a> : (''b,''c,'k)arr * (''d,''e,'k)arr -> (''b*''d,''c*''e,'k)arr
+    <b>val</b> <a href='#$02$02$02'>&&&</a> : (''b,''c,'k)arr * (''b,''d,'k)arr -> (''b,''c*''d,'k)arr
+
+    (* Behavior operations *)
+    <b>val</b> <a href='#timer'>timer</a>     : int -> <a href='Time.sml.html#$STime'>Time</a>.<a href='Time.sml.html#$Ttime'>time</a> b
+    <b>val</b> <a href='#textField'>textField</a> : string -> string b
+    <b>val</b> <a href='#mouseOver'>mouseOver</a> : string -> bool b
+    <b>val</b> <a href='#mouse'>mouse</a>     : unit -> (int*int) b
+    <b>val</b> <a href='#pair'>pair</a>      : ''a b * ''b b -> (''a * ''b) b
+    <b>val</b> <a href='#tup3'>tup3</a>      : ''a b * ''b b * ''c b -> (''a * ''b * ''c) b
+    <b>val</b> <a href='#list'>list</a>      : ''a b list -> ''a list b
+    <b>val</b> <a href='#delay'>delay</a>     : int -> (''a,''a,B)arr
+    <b>val</b> <a href='#calm'>calm</a>      : int -> (''a,''a,B)arr
+    <b>val</b> <a href='#const'>const</a>     : ''a -> ''a b
+    <b>val</b> <a href='#iff'>iff</a>       : bool b * ''a b * ''a b -> ''a b
+    <b>val</b> <a href='#when'>when</a>      : bool b * ''a b -> ''a b
+    <b>val</b> <a href='#until'>until</a>     : bool b * ''a b -> ''a b
+    <b>val</b> <a href='#current'>current</a>   : ''a b -> ''a
+    <b>val</b> <a href='#poll'>poll</a>      : (unit -> ''a) -> int -> ''a b
+    <b>val</b> <a href='#insertDOM'>insertDOM</a> : string -> string b -> unit
+    <b>val</b> <a href='#setStyle'>setStyle</a>  : string -> (string * string b) -> unit
+    <b>val</b> <a href='#setAttr'>setAttr</a>   : string -> (string * string b) -> unit
+    <b>val</b> <a href='#flatten'>flatten</a>   : ''a b b -> ''a b
+
+    (* Event operations *)
+    <b>val</b> <a href='#merge'>merge</a>     : ''a e * ''a e -> ''a e
+    <b>val</b> <a href='#fold'>fold</a>      : (''a * ''b -> ''b) -> ''b -> ''a e -> ''b e
+    <b>val</b> <a href='#click'>click</a>     : string -> ''a -> ''a e
+    <b>val</b> <a href='#empty'>empty</a>     : unit -> ''a e
+
+    (* Mixed and General operations *)
+    <b>val</b> <a href='#changes'>changes</a>   : ''a b -> ''a e
+    <b>val</b> <a href='#hold'>hold</a>      : ''a -> ''a e -> ''a b
+    <b>val</b> <a href='#send'>send</a>      : (''a,'k)t -> ''a -> unit
+    <b>val</b> <a href='#addListener'>addListener</a> : (''a,'k)t -> (''a -> unit) -> unit
+
+    (* Element operations *)
+    <b>val</b> <a href='#insertDOM$07elem'>insertDOM_elem</a> : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> string b -> unit
+    <b>val</b> <a href='#setStyle$07elem'>setStyle_elem</a>  : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> (string * string b) -> unit
+    <b>val</b> <a href='#setAttr$07elem'>setAttr_elem</a>   : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> (string * string b) -> unit
+    <b>val</b> <a href='#textField$07elem'>textField_elem</a> : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> string b
+    <b>val</b> <a href='#mouseOver$07elem'>mouseOver_elem</a> : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> bool b
+    <b>val</b> <a href='#click$07elem'>click_elem</a>     : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> ''a -> ''a e
+
+    <b>val</b> <a href='#mouse$07elem'>mouse_elem</a>     : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Telem'>elem</a> -> (int*int) b
+    <b>val</b> <a href='#mouse$07doc'>mouse_doc</a>      : <a href='Js.sml.html#$SJs'>Js</a>.<a href='Js.sml.html#$Tdoc'>doc</a> -> (int*int) b
+  <b>end</b></pre><hr /><dl><dt><b>[<tt>type 'a b</tt>]</b></dt> <dd>type of behavior with underlying values of type 'a.
+</dd><br /><dt><b>[<tt>type 'a e</tt>]</b></dt> <dd>type of event stream with underlying values of type 'a.
+</dd><br /><dt><b>[<tt>type ('b,'c,'k)arr</tt>]</b></dt> <dd>type of behavior (kind 'k = B) or event stream
+(kind 'k = E) transformers from type 'b to type 'c.
+</dd><br /><dt><b>[<tt><a name='arr'>arr f</a></tt>]</b></dt> <dd>returns a transformer by lifting the function f to work on
+behaviors or events.
+</dd><br /><dt><b>[<tt><a name='$05$05$05'>f &gt;&gt;&gt; g</a></tt>]</b></dt> <dd>returns the transformer resulting from composing f and
+g. From the arrow laws, we have &quot;arr f &gt;&gt;&gt; arr g == arr (g o f)&quot;.
+</dd><br /><dt><b>[<tt><a name='fst'>fst f</a></tt>]</b></dt> <dd>returns a pair-transformer that works as f on the first
+component and as the identity on the second component.
+</dd><br /><dt><b>[<tt><a name='snd'>snd f</a></tt>]</b></dt> <dd>returns a pair-transformer that works as f on the second
+component and as the identity on the first component.
+</dd><br /><dt><b>[<tt><a name='***'>f *** g</a></tt>]</b></dt> <dd>returns a pair-transformer that works as f on the first
+component and as g on the second component.
+</dd><br /><dt><b>[<tt><a name='$02$02$02'>f &amp;&amp;&amp; g</a></tt>]</b></dt> <dd>returns a transformer that given input x will generate
+pairs (f x, g x) as outputs.
+</dd><br /><dt><b>[<tt><a name='timer'>timer n</a></tt>]</b></dt> <dd>returns a time behavior that updates itself every n
+microseconds.
+</dd><br /><dt><b>[<tt><a name='textField'>textField id</a></tt>]</b></dt> <dd>returns a string behavior holding the current content
+of an input field value identified by id. Raises Fail if there is no
+element identified by id in the DOM.
+</dd><br /><dt><b>[<tt>mouseover id</tt>]</b></dt> <dd>returns a boolean behavior with a value indicating
+whether the mouse is over the element identified by id. Raises Fail
+if there is no element identified by id in the DOM.
+</dd><br /><dt><b>[<tt><a name='mouse'>mouse()</a></tt>]</b></dt> <dd>returns a pair behavior for the x-y positions of the mouse
+relative to the upper-left corner of the browser window.
+</dd><br /><dt><b>[<tt><a name='pair'>pair(b1,b2)</a></tt>]</b></dt> <dd>returns a behavior for the pair of the two behaviors b1
+and b2. Sem[pair(b1,b2)] = \t.(Sem[b1]t,Sem[b2]t).
+</dd><br /><dt><b>[<tt><a name='merge'>merge(e1,e2)</a></tt>]</b></dt> <dd>returns the event stream resulting from merging the
+two event streams e1 and e2.
+</dd><br /><dt><b>[<tt><a name='delay'>delay n b</a></tt>]</b></dt> <dd>returns a behavior equal to b but delayed n microseconds.
+</dd><br /><dt><b>[<tt><a name='calm'>calm n b</a></tt>]</b></dt> <dd>returns a behavior equal to b but which is updated only
+when there has been no changes in b for n microseconds.
+</dd><br /><dt><b>[<tt><a name='fold'>fold f a e</a></tt>]</b></dt> <dd>returns an event stream resulting from accumulating the
+results of calling f on events in e.
+</dd><br /><dt><b>[<tt><a name='click'>click id a</a></tt>]</b></dt> <dd>returns an event stream (of a's) representing clicks on
+an element identified by id. Raises Fail if there is no element
+identified by id in the DOM.
+</dd><br /><dt><b>[<tt><a name='changes'>changes b</a></tt>]</b></dt> <dd>returns an event stream representing changes to the
+bahavior b.
+</dd><br /><dt><b>[<tt><a name='hold'>hold a es</a></tt>]</b></dt> <dd>returns a behavior holding the value of the previous
+element in the event stream es with a being the initial value.
+</dd><br /><dt><b>[<tt><a name='const'>const a</a></tt>]</b></dt> <dd>returns the constant behavior with value a. Sem(const a) =
+\t.a.
+</dd><br /><dt><b>[<tt><a name='empty'>empty()</a></tt>]</b></dt> <dd>returns the empty event stream.
+</dd><br /><dt><b>[<tt><a name='iff'>iff (x,y,z)</a></tt>]</b></dt> <dd>returns the behavior which is y when x is true and z
+when x is false. Sem[iff (x,y,z)] = \t.if Sem[x](t) then Sem[y](t)
+else Sem[z](t).
+</dd><br /><dt><b>[<tt><a name='when'>when (x,y)</a></tt>]</b></dt> <dd>returns the behavior that changes according to y when x
+is true and otherwise does not change. The initial value of the
+resulting behavior is identical to the current value of y. Sem[when(x,y)] =
+\t.if Sem[x](t) then Sem[y](t) else Sem[y](t-delta).
+</dd><br /><dt><b>[<tt><a name='until'>until (x,y)</a></tt>]</b></dt> <dd>returns the behavior that changes according to y until
+x becomes true the first time. After this, the resulting behavior is
+constant. The initial value of the resulting behavior is identical to
+the current value of y.
+</dd><br /><dt><b>[<tt><a name='current'>current b</a></tt>]</b></dt> <dd>returns the current value of the behavior b.
+</dd><br /><dt><b>[<tt><a name='poll'>poll f n</a></tt>]</b></dt> <dd>returns a behavior holding the values resulting from
+calling the function f every n microseconds.
+</dd><br /><dt><b>[<tt><a name='insertDOM'>insertDOM id b</a></tt>]</b></dt> <dd>effectively inserts the behavior in the DOM tree
+under the element identified by id. Raises Fail if there is no
+element identified by id in the DOM.
+</dd><br /><dt><b>[<tt><a name='mouse$07elem'>mouse_elem e</a></tt>]</b></dt> <dd>returns a pair behavior for the x-y positions of the mouse
+relative to the upper-left corner of the element e.
+</dd><br /></dl><hr /><i>Generated by SigDoc</i></body></html>

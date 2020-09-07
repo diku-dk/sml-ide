@@ -1,0 +1,126 @@
+<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='width:100%; margin-right:20px;'></input></p><hr /><h4>Signature <tt>JS_CORE</tt></h4><p> Core Javascript functionality </p>Basic functionality for accessing native Javascript code.
+<hr /><pre><b>structure JsCore : JS_CORE
+</b></pre><hr /><pre><b>signature</b> JS_CORE =
+  <b>sig</b>
+    <b>type</b> 'a T
+    <b>val</b> <a href='#unit'>unit</a>   : unit T
+    <b>val</b> <a href='#int'>int</a>    : int T
+    <b>val</b> <a href='#string'>string</a> : string T
+    <b>val</b> <a href='#real'>real</a>   : real T
+    <b>val</b> <a href='#fptr'>fptr</a>   : foreignptr T
+    <b>val</b> <a href='#bool'>bool</a>   : bool T
+    <b>val</b> <a href='#option'>option</a> : 'a T -> 'a option T
+    <b>val</b> <a href='#$16$16$05'>==></a>    : 'a T * 'b T -> ('a -> 'b) T
+    <b>val</b> <a href='#$16$16$16$05'>===></a>   : 'a T * 'b T * 'c T -> ('a*'b -> 'c) T
+    <b>val</b> <a href='#$16$16$16$16$05'>====></a>  : 'a T * 'b T * 'c T * 'd T -> ('a*'b*'c -> 'd) T
+
+    <b>val</b> <a href='#exec0'>exec0</a> : {stmt: string,
+                 res: 'b T} 
+                -> unit -> 'b
+
+    <b>val</b> <a href='#exec1'>exec1</a> : {stmt: string, 
+                 arg1: string * 'a1 T, 
+                 res: 'b T} 
+                -> 'a1 -> 'b
+
+    <b>val</b> <a href='#exec2'>exec2</a> : {stmt: string, 
+                 arg1: string * 'a1 T, 
+                 arg2: string * 'a2 T, 
+                 res: 'b T} 
+                -> 'a1 * 'a2 -> 'b
+
+    <b>val</b> <a href='#exec3'>exec3</a> : {stmt: string, 
+                 arg1: string * 'a1 T, 
+                 arg2: string * 'a2 T, 
+                 arg3: string * 'a3 T, 
+                 res: 'b T} 
+                -> 'a1 * 'a2 * 'a3 -> 'b
+
+    <b>val</b> <a href='#exec4'>exec4</a> : {stmt: string, 
+                 arg1: string * 'a1 T, 
+                 arg2: string * 'a2 T, 
+                 arg3: string * 'a3 T, 
+                 arg4: string * 'a4 T, 
+                 res: 'b T} 
+                -> 'a1 * 'a2 * 'a3 * 'a4 -> 'b
+
+    <b>val</b> <a href='#exec5'>exec5</a> : {stmt: string, 
+                 arg1: string * 'a1 T, 
+                 arg2: string * 'a2 T, 
+                 arg3: string * 'a3 T, 
+                 arg4: string * 'a4 T, 
+                 arg5: string * 'a5 T, 
+                 res: 'b T} 
+                -> 'a1 * 'a2 * 'a3 * 'a4 * 'a5 -> 'b
+
+    <b>val</b> <a href='#exec10'>exec10</a> : {stmt: string, 
+                  arg1: string * 'a1 T, 
+                  arg2: string * 'a2 T, 
+                  arg3: string * 'a3 T, 
+                  arg4: string * 'a4 T, 
+                  arg5: string * 'a5 T, 
+                  arg6: string * 'a6 T, 
+                  arg7: string * 'a7 T, 
+                  arg8: string * 'a8 T, 
+                  arg9: string * 'a9 T, 
+                  arg10: string * 'a10 T, 
+                  res: 'b T} 
+                 -> 'a1 * 'a2 * 'a3 * 'a4 * 'a5 * 'a6 * 'a7 * 'a8 * 'a9 * 'a10 -> 'b
+
+    <b>val</b> <a href='#call0'>call0</a> : string * 'b T -> 'b
+    <b>val</b> <a href='#call1'>call1</a> : string * 'a1 T * 'b T -> 'a1 -> 'b
+    <b>val</b> <a href='#call2'>call2</a> : string * 'a1 T * 'a2 T * 'b T -> 'a1*'a2 -> 'b
+    <b>val</b> <a href='#call3'>call3</a> : string * 'a1 T * 'a2 T * 'a3 T * 'b T -> 'a1*'a2*'a3 -> 'b
+    <b>val</b> <a href='#call4'>call4</a> : string * 'a1 T * 'a2 T * 'a3 T * 'a4 T * 'b T -> 'a1*'a2*'a3*'a4 -> 'b
+
+    <b>val</b> <a href='#method0'>method0</a> : 'b T -> foreignptr -> string -> 'b
+    <b>val</b> <a href='#method1'>method1</a> : 'a1 T -> 'b T -> foreignptr -> string -> 'a1 -> 'b
+    <b>val</b> <a href='#method2'>method2</a> : 'a1 T -> 'a2 T -> 'b T -> foreignptr -> string -> 'a1 -> 'a2 -> 'b
+    <b>val</b> <a href='#method3'>method3</a> : 'a1 T -> 'a2 T -> 'a3 T -> 'b T -> foreignptr -> string -> 'a1 -> 'a2 -> 'a3 -> 'b
+    <b>val</b> <a href='#method4'>method4</a> : 'a1 T -> 'a2 T -> 'a3 T -> 'a4 T -> 'b T -> foreignptr -> string -> 'a1 -> 'a2 -> 'a3 -> 'a4 -> 'b
+
+    <b>val</b> <a href='#getProperty'>getProperty</a> : foreignptr -> 'a T -> string -> 'a
+    <b>val</b> <a href='#setProperty'>setProperty</a> : foreignptr -> 'a T -> string -> 'a -> unit
+
+    <b>structure</b> Array : <b>sig</b>
+      <b>type</b> t = foreignptr
+      <b>val</b> <a href='#empty'>empty</a>    : unit -> t
+      <b>val</b> <a href='#push'>push</a>     : 'a T -> t -> 'a -> t
+      <b>val</b> <a href='#fromList'>fromList</a> : 'a T -> 'a list -> t
+    <b>end</b>
+
+    <b>structure</b> Object : <b>sig</b>
+      <b>type</b> t = foreignptr
+      <b>val</b> <a href='#empty'>empty</a>    : unit -> t
+      <b>val</b> <a href='#get'>get</a>      : 'a T -> t -> string -> 'a
+      <b>val</b> <a href='#set'>set</a>      : 'a T -> t -> string -> 'a -> unit
+      <b>val</b> <a href='#fromList'>fromList</a> : 'a T -> (string * 'a) list -> t
+    <b>end</b>
+
+    <b>structure</b> TypedObjects : <b>sig</b>
+      <b>type</b> 'a j    (* any *)
+      <b>type</b> obj     (* objects *)
+      <b>type</b> 'a arr  (* arrays *)
+      <b>val</b> <a href='#$03$05'>/></a> : obj j * obj j -> obj j
+      <b>val</b> <a href='#P'>P</a> : string -> 'a j -> obj j
+      <b>val</b> <a href='#S'>S</a> : string -> string j
+      <b>val</b> <a href='#I'>I</a> : int -> int j
+      <b>val</b> <a href='#R'>R</a> : real -> real j
+      <b>val</b> <a href='#B'>B</a> : bool -> bool j
+      <b>val</b> <a href='#F'>F</a> : foreignptr -> foreignptr j
+      <b>val</b> <a href='#A'>A</a> : 'a j list -> 'a arr j
+      <b>val</b> <a href='#objToFptr'>objToFptr</a> : obj j -> foreignptr
+      <b>val</b> <a href='#arrToFptr'>arrToFptr</a> : 'a arr j -> foreignptr
+    <b>end</b>
+                           
+  <b>end</b></pre><hr /><dl><dt><b>[<tt>type 'a T</tt>]</b></dt><dt><b>[<tt>execN a v</tt>]</b></dt> <dd>returns the result of executing the javascript statement
+in a with actual arguments (v) provided for the formal parameters,
+specified in a.
+</dd><br /><dt><b>[<tt>callN (t1,...,tn,tr)</tt>]</b></dt> <dd>(v1,...,vn)] returns the result of calling the
+javascript function n with proper arguments (vi) given for each of the
+arguments specified by tn.
+</dd><br /><dt><b>[<tt><a name='getProperty'>getProperty fp t s</a></tt>]</b></dt> <dd>extracts the property s (of type t) from the
+object specified by fp.
+</dd><br /><dt><b>[<tt><a name='setProperty'>setProperty fp t s v</a></tt>]</b></dt> <dd>sets the property s to the value v (of type t)
+on the object specified by fp.
+</dd><br /></dl><hr /><i>Generated by SigDoc</i></body></html>

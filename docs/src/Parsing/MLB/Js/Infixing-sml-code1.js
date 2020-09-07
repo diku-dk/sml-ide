@@ -1,0 +1,17 @@
+if ((typeof(basics$0Infixing$1$1)) == "undefined") {basics$0Infixing$1$1 = {};
+};
+(function(){basics$0Infixing$1$1.impossible$62 = function(s$65){return tools$0Crash$1.impossible$59("Infixing." + s$65);
+};
+basics$0Infixing$1$1.s$hh$66 = function(v$117){return tools$0Report$1.s$hh$64(v$117[0],v$117[1]);
+};
+basics$0Infixing$1$1.en$Error$67 = new String("Error");
+basics$0Infixing$1$1.en$InfixStack_error$68 = new String("InfixStack_error");
+basics$0Infixing$1$1.error_report$69 = function(info$72,report$75){throw [basics$0Infixing$1$1.en$Error$67,tools$0Report$1.s$hh$64(basics$0GrammarUtils$1.reportPosition_from_info$1304(info$72),report$75)];
+};
+basics$0Infixing$1$1.error_string$76 = function(info$79,s$82){var report$114 = tools$0Report$1.line$60(s$82);
+throw [basics$0Infixing$1$1.en$Error$67,tools$0Report$1.s$hh$64(basics$0GrammarUtils$1.reportPosition_from_info$1304(info$79),report$114)];
+};
+basics$0Infixing$1$1.explicit_regions$83 = function(v$85){return tools$0Flags$1$6.is_on$5160("explicit_regions");
+};
+return 0;
+})();
