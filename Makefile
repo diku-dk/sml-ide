@@ -1,7 +1,9 @@
 
 .PHONY: all
 all:
-	echo ' - make upgrade'
+	@echo 'Possible targets:'
+	@echo ' - make upgrade'
+	@echo ' - make clean'
 
 .PHONY: upgrade
 upgrade:
@@ -10,3 +12,8 @@ upgrade:
 	mv docs docs_old
 	mv smltojsonline docs
 	touch docs/.nojekyll
+
+.PHONY: clean
+clean:
+	rm -rf smltojsonline
+	rm -rf docs_old
