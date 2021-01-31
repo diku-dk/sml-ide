@@ -20,7 +20,7 @@ t$236 = [basis$0List$1.map$697(function(x$203){var v$227 = compiler_objects$0Lam
 return [1,v$227];
 },v$92),v$198,").",0,"all("];
 t$237 = [0,t$236];
-t$238 = [t$237,[compiler_objects$0LambdaExp$1$4.layoutType$2964(v$93),null]];
+t$238 = [t$237,[compiler_objects$0LambdaExp$1$4.layoutType$2973(v$93),null]];
 t$239 = t$238;
 t$235 = [t$239,v$90,"",0,""];
 return [0,t$235];
@@ -38,7 +38,7 @@ t$241 = [basis$0List$1.map$697(function(x$214){var v$229 = compiler_objects$0Lam
 return [1,v$229];
 },v$230),v$209,").",0,"all("];
 t$242 = [0,t$241];
-t$243 = [t$242,[compiler_objects$0LambdaExp$1$4.layoutType$2964(v$231),null]];
+t$243 = [t$242,[compiler_objects$0LambdaExp$1$4.layoutType$2973(v$231),null]];
 t$244 = t$243;
 t$240 = [t$244,v$207,"",0,""];
 t$245 = [0,t$240];
