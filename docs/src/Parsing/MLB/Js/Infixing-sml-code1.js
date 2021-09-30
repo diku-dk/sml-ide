@@ -11,7 +11,7 @@ basics$0Infixing$1$1.error_report$69 = function(info$72,report$75){throw [basics
 basics$0Infixing$1$1.error_string$76 = function(info$79,s$82){var report$114 = tools$0Report$1.line$60(s$82);
 throw [basics$0Infixing$1$1.en$Error$67,tools$0Report$1.s$hh$64(basics$0GrammarUtils$1.reportPosition_from_info$1304(info$79),report$114)];
 };
-basics$0Infixing$1$1.explicit_regions$83 = function(v$85){return tools$0Flags$1$6.is_on$5160("explicit_regions");
+basics$0Infixing$1$1.explicit_regions$83 = function(v$85){return tools$0Flags$1$6.is_on$5190("explicit_regions");
 };
 return 0;
 })();

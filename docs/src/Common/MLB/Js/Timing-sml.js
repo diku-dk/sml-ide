@@ -1,7 +1,7 @@
 if ((typeof(tools$0Timing$1)) == "undefined") {tools$0Timing$1 = {};
 };
 (function(){var compiler_timings$81 = [false];
-tools$0Flags$1$6.add_bool_entry$4824(["Show compiler timings for each compilation phase.",compiler_timings$81,"compiler_timings",["Debug",["compiler timings",null]],false,[0,"timings"]]);
+tools$0Flags$1$6.add_bool_entry$4854(["Show compiler timings for each compilation phase.",compiler_timings$81,"compiler_timings",["Debug",["compiler timings",null]],false,[0,"timings"]]);
 var t$88 = [basis$0Timer$1.startCPUTimer$88(0)];
 var rt$89 = [SmlPrims.getrealtime()];
 var timingNow$90 = [false];

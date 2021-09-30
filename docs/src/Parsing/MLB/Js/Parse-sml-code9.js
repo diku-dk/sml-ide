@@ -398,7 +398,7 @@ if (t$17683[0] == CompilerInitial.en$Overflow$50) {return tools$0Crash$1.impossi
 })(v$17677);
 };
 };
-basics$0Parse$1$9.asReal$16451 = function(text$16454){switch ((basis$0Real$1.fromString$497(text$16454))[0]) { case 0: {return [0,text$16454];
+basics$0Parse$1$9.asReal$16451 = function(text$16454){switch ((basis$0Real$1.fromString$504(text$16454))[0]) { case 0: {return [0,text$16454];
  break; }default: {return [1];
 } };
 };
@@ -633,7 +633,7 @@ var v$16636 = v$16635[3];
 return SmlPrims.concat(basis$0List$1.rev$682(v$16636[0]));
 };
 basics$0Parse$1$9.explicit_regions$16637 = [false];
-tools$0Flags$1$6.add_bool_entry$4824(["Support programming with explicit regions.",basics$0Parse$1$9.explicit_regions$16637,"explicit_regions",["Control",["Explicit regions",null]],false,[0,"er"]]);
+tools$0Flags$1$6.add_bool_entry$4854(["Support programming with explicit regions.",basics$0Parse$1$9.explicit_regions$16637,"explicit_regions",["Control",["Explicit regions",null]],false,[0,"er"]]);
 basics$0Parse$1$9.identifier$16644 = function(v$16766,v$16767,v$16768){switch (v$16766) { case "abstype": {return basics$0Parse$1$8.ABSTYPE$13868(v$16767,v$16768);
  break; }case "and": {return basics$0Parse$1$8.AND$13875(v$16767,v$16768);
  break; }case "andalso": {return basics$0Parse$1$8.ANDALSO$13882(v$16767,v$16768);

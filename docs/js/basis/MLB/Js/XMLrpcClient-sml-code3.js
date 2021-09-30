@@ -70,7 +70,7 @@ js$0XMLrpcClient$1$3.bool$323 = (function(toplevel$893){return [function(x$896){
 });
 js$0XMLrpcClient$1$3.real$338;
 var u$339;
-var v$1386 = xmlrpc$0Parsercomb$1.scan$169(function(v$1663){return function(v$1664){return basis$0Real$1.scan$219(v$1663,v$1664);
+var v$1386 = xmlrpc$0Parsercomb$1.scan$169(function(v$1663){return function(v$1664){return basis$0Real$1.scan$226(v$1663,v$1664);
 };
 });
 var v$1387 = xmlrpc$0Parsercomb$1.s$gge$322(xmlrpc$0Parsercomb$1.s$egg$304(xmlrpc$0Parsercomb$1.s$gg$274(function(v$1666){return xmlrpc$0Parsercomb$1.s$d$414("<double>",v$1666);
@@ -87,7 +87,7 @@ u$339 = (xmlrpc$0Parsercomb$1.s$gge$322(xmlrpc$0Parsercomb$1.s$egg$304(xmlrpc$0P
 },function(v$1686){return xmlrpc$0Parsercomb$1.repeat0$386(function(v$1970){return xmlrpc$0Parsercomb$1.s$d$414("\n",v$1970);
 },v$1686);
 })));
-js$0XMLrpcClient$1$3.real$338 = (function(toplevel$911){return [function(x$914){return toplevel$911?[2,[[2,[[3,["<",["param",[">",null]]]],[2,[[2,[[3,["<",["value",[">",null]]]],[2,[[2,[[3,["<",["double",[">",null]]]],[4,basis$0Real$1.toString$153(x$914)]]],[3,["</",["double",[">",null]]]]]]]],[3,["</",["value",[">",null]]]]]]]],[3,["</",["param",[">",null]]]]]]:[2,[[2,[[3,["<",["value",[">",null]]]],[2,[[2,[[3,["<",["double",[">",null]]]],[4,basis$0Real$1.toString$153(x$914)]]],[3,["</",["double",[">",null]]]]]]]],[3,["</",["value",[">",null]]]]]];
+js$0XMLrpcClient$1$3.real$338 = (function(toplevel$911){return [function(x$914){return toplevel$911?[2,[[2,[[3,["<",["param",[">",null]]]],[2,[[2,[[3,["<",["value",[">",null]]]],[2,[[2,[[3,["<",["double",[">",null]]]],[4,basis$0Real$1.toString$160(x$914)]]],[3,["</",["double",[">",null]]]]]]]],[3,["</",["value",[">",null]]]]]]]],[3,["</",["param",[">",null]]]]]]:[2,[[2,[[3,["<",["value",[">",null]]]],[2,[[2,[[3,["<",["double",[">",null]]]],[4,basis$0Real$1.toString$160(x$914)]]],[3,["</",["double",[">",null]]]]]]]],[3,["</",["value",[">",null]]]]]];
 },u$339];
 });
 js$0XMLrpcClient$1$3.string$342;
