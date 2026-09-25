@@ -1,8 +1,8 @@
-if ((typeof(basis$0Control$1)) == "undefined") {basis$0Control$1 = {};
+if ((typeof(ARwV9KuvIcsnRiJKfWZgAh$3basis$0Control$1)) == "undefined") {ARwV9KuvIcsnRiJKfWZgAh$3basis$0Control$1 = {};
 };
-(function(){basis$0Control$1.printer_set$54 = function(v$82){return basis$0Initial$1.printer_set$98(v$82);
+(function(){ARwV9KuvIcsnRiJKfWZgAh$3basis$0Control$1.printer_set$52 = function(v$80){return NJpDm7cnM2JakjlO5ExRcc$3basis$0Initial$1.printer_set$96(v$80);
 };
-basis$0Control$1.printer_get$55 = function(v$83){return basis$0Initial$1.printer_get$102(v$83);
+ARwV9KuvIcsnRiJKfWZgAh$3basis$0Control$1.printer_get$53 = function(){return NJpDm7cnM2JakjlO5ExRcc$3basis$0Initial$1.printer_get$100();
 };
 return 0;
 })();
