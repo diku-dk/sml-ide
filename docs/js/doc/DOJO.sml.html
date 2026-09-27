@@ -1,4 +1,4 @@
-<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='width:100%; margin-right:20px;'></input></p><hr /><h4>Signature <tt>DOJO</tt></h4><p> Dojo/Dijit layout widgets.</p>The interface supports a monadic style of programming. The
+<html><head><head><link rel='stylesheet' href='jquery-ui.css'></link><script src='jquery-1.9.1.js'></script><script src='jquery-ui.js'></script><script src='generated_tags.js'></script><link rel='stylesheet' href='style.css'></link><script>$(function() {   $( '#tags' ).autocomplete({    source: availableTags,    select: function(event,ui){ window.location = ui.item.value; }  });});</script></head></head><body><p><a href='str_idx.html'>Structures</a> | <td align='center'><a href='sig_idx.html'>Signatures</a></td> | <td align='right'><a href='id_idx.html'>Identifiers</a></td></p><p style='width:100%'><input id='tags' placeholder='Search' style='display:block; box-sizing:border-box; width:100%; margin:0;'></input></p><hr /><h4>Signature <tt>DOJO</tt></h4><p> Dojo/Dijit layout widgets.</p>The interface supports a monadic style of programming. The
 implementation of the monad is the continuation monad, capturing the
 continuation-based approach to loading libraries in the Dojo
 framework. For general information about the Dojo framework, see
@@ -63,6 +63,7 @@ http://dojotoolkit.org/reference-guide/1.10/.
     <b>val</b> <a href='#mk'>mk</a>     : hash -> (widget * menu) M
     <b>val</b> <a href='#menu'>menu</a>   : menu -> string -> menu M
     <b>val</b> <a href='#item'>item</a>   : menu -> string * icon option * (unit -> unit) -> unit M
+    <b>val</b> <a href='#itemWidget'>itemWidget</a> : menu -> string * icon option * (unit -> unit) -> widget M
   <b>end</b>
 
   <b>type</b> 'a editCon
