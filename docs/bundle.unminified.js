@@ -25583,7 +25583,7 @@ bAicjG6UbtGjmbgH54jwmi$3dojo$0dojo$1.run$191 = function(m$194){return m$194(func
 var thunks$198 = [[0,null]];
 bAicjG6UbtGjmbgH54jwmi$3dojo$0dojo$1.attachToElement$199 = function(e$202,m$205,k$208){var v$227 = thunks$198[0];
 switch (v$227[0]) { case 0: {var v$229 = v$227[1];
-if (v$229 == null) {(function(){this.dojoConfig = {parseOnLoad: true};})();
+if (v$229 == null) {(function(){this.dojoConfig = {parseOnLoad: true, async: true};})();
 (thunks$198[0] = [0,[function(v$3420){return (function(f){require(['dojo/domReady!'],f);})(function(v$3421){return m$205(function(c$3422){(function(e,a){return e.appendChild(a);})(e$202,(function(fp,s){return fp[s];})(c$3422,"domNode"));
 (function(obj){return obj.startup();})(c$3422);
 return k$208(0);

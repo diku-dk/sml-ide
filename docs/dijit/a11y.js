@@ -1,104 +1,176 @@
-//>>built
-define("dijit/a11y",["dojo/_base/array","dojo/dom","dojo/dom-attr","dojo/dom-style","dojo/_base/lang","dojo/sniff","./main"],function(_1,_2,_3,_4,_5,_6,_7){
-var _8={_isElementShown:function(_9){
-var s=_4.get(_9);
-return (s.visibility!="hidden")&&(s.visibility!="collapsed")&&(s.display!="none")&&(_3.get(_9,"type")!="hidden");
-},hasDefaultTabStop:function(_a){
-switch(_a.nodeName.toLowerCase()){
-case "a":
-return _3.has(_a,"href");
-case "area":
-case "button":
-case "input":
-case "object":
-case "select":
-case "textarea":
-return true;
-case "iframe":
-var _b;
-try{
-var _c=_a.contentDocument;
-if("designMode" in _c&&_c.designMode=="on"){
-return true;
-}
-_b=_c.body;
-}
-catch(e1){
-try{
-_b=_a.contentWindow.document.body;
-}
-catch(e2){
-return false;
-}
-}
-return _b&&(_b.contentEditable=="true"||(_b.firstChild&&_b.firstChild.contentEditable=="true"));
-default:
-return _a.contentEditable=="true";
-}
-},isTabNavigable:function(_d){
-if(_3.get(_d,"disabled")){
-return false;
-}else{
-if(_3.has(_d,"tabIndex")){
-return _3.get(_d,"tabIndex")>=0;
-}else{
-return _8.hasDefaultTabStop(_d);
-}
-}
-},_getTabNavigable:function(_e){
-var _f,_10,_11,_12,_13,_14,_15={};
-function _16(_17){
-return _17&&_17.tagName.toLowerCase()=="input"&&_17.type&&_17.type.toLowerCase()=="radio"&&_17.name&&_17.name.toLowerCase();
-};
-var _18=_8._isElementShown,_19=_8.isTabNavigable;
-var _1a=function(_1b){
-for(var _1c=_1b.firstChild;_1c;_1c=_1c.nextSibling){
-if(_1c.nodeType!=1||(_6("ie")<=9&&_1c.scopeName!=="HTML")||!_18(_1c)){
-continue;
-}
-if(_19(_1c)){
-var _1d=+_3.get(_1c,"tabIndex");
-if(!_3.has(_1c,"tabIndex")||_1d==0){
-if(!_f){
-_f=_1c;
-}
-_10=_1c;
-}else{
-if(_1d>0){
-if(!_11||_1d<_12){
-_12=_1d;
-_11=_1c;
-}
-if(!_13||_1d>=_14){
-_14=_1d;
-_13=_1c;
-}
-}
-}
-var rn=_16(_1c);
-if(_3.get(_1c,"checked")&&rn){
-_15[rn]=_1c;
-}
-}
-if(_1c.nodeName.toUpperCase()!="SELECT"){
-_1a(_1c);
-}
-}
-};
-if(_18(_e)){
-_1a(_e);
-}
-function rs(_1e){
-return _15[_16(_1e)]||_1e;
-};
-return {first:rs(_f),last:rs(_10),lowest:rs(_11),highest:rs(_13)};
-},getFirstInTabbingOrder:function(_1f,doc){
-var _20=_8._getTabNavigable(_2.byId(_1f,doc));
-return _20.lowest?_20.lowest:_20.first;
-},getLastInTabbingOrder:function(_21,doc){
-var _22=_8._getTabNavigable(_2.byId(_21,doc));
-return _22.last?_22.last:_22.highest;
-}};
-1&&_5.mixin(_7,_8);
-return _8;
+define("dijit/a11y", [
+	"dojo/_base/array", // array.forEach array.map
+	"dojo/dom",			// dom.byId
+	"dojo/dom-attr", // domAttr.attr domAttr.has
+	"dojo/dom-style", // domStyle.style
+	"dojo/_base/lang", // lang.mixin()
+	"dojo/sniff", // has("ie")  1 
+	"./main"	// for exporting methods to dijit namespace
+], function(array, dom, domAttr, domStyle, lang, has, dijit){
+
+	// module:
+	//		dijit/a11y
+
+	var a11y = {
+		// summary:
+		//		Accessibility utility functions (keyboard, tab stops, etc.)
+
+		_isElementShown: function(/*Element*/ elem){
+			var s = domStyle.get(elem);
+			return (s.visibility != "hidden")
+				&& (s.visibility != "collapsed")
+				&& (s.display != "none")
+				&& (domAttr.get(elem, "type") != "hidden");
+		},
+
+		hasDefaultTabStop: function(/*Element*/ elem){
+			// summary:
+			//		Tests if element is tab-navigable even without an explicit tabIndex setting
+
+			// No explicit tabIndex setting, need to investigate node type
+			switch(elem.nodeName.toLowerCase()){
+				case "a":
+					// An <a> w/out a tabindex is only navigable if it has an href
+					return domAttr.has(elem, "href");
+				case "area":
+				case "button":
+				case "input":
+				case "object":
+				case "select":
+				case "textarea":
+					// These are navigable by default
+					return true;
+				case "iframe":
+					// If it's an editor <iframe> then it's tab navigable.
+					var body;
+					try{
+						// non-IE
+						var contentDocument = elem.contentDocument;
+						if("designMode" in contentDocument && contentDocument.designMode == "on"){
+							return true;
+						}
+						body = contentDocument.body;
+					}catch(e1){
+						// contentWindow.document isn't accessible within IE7/8
+						// if the iframe.src points to a foreign url and this
+						// page contains an element, that could get focus
+						try{
+							body = elem.contentWindow.document.body;
+						}catch(e2){
+							return false;
+						}
+					}
+					return body && (body.contentEditable == 'true' ||
+						(body.firstChild && body.firstChild.contentEditable == 'true'));
+				default:
+					return elem.contentEditable == 'true';
+			}
+		},
+
+		isTabNavigable: function(/*Element*/ elem){
+			// summary:
+			//		Tests if an element is tab-navigable
+
+			// TODO: convert (and rename method) to return effective tabIndex; will save time in _getTabNavigable()
+			if(domAttr.get(elem, "disabled")){
+				return false;
+			}else if(domAttr.has(elem, "tabIndex")){
+				// Explicit tab index setting
+				return domAttr.get(elem, "tabIndex") >= 0; // boolean
+			}else{
+				// No explicit tabIndex setting, so depends on node type
+				return a11y.hasDefaultTabStop(elem);
+			}
+		},
+
+		_getTabNavigable: function(/*DOMNode*/ root){
+			// summary:
+			//		Finds descendants of the specified root node.
+			// description:
+			//		Finds the following descendants of the specified root node:
+			//
+			//		- the first tab-navigable element in document order
+			//		  without a tabIndex or with tabIndex="0"
+			//		- the last tab-navigable element in document order
+			//		  without a tabIndex or with tabIndex="0"
+			//		- the first element in document order with the lowest
+			//		  positive tabIndex value
+			//		- the last element in document order with the highest
+			//		  positive tabIndex value
+			var first, last, lowest, lowestTabindex, highest, highestTabindex, radioSelected = {};
+
+			function radioName(node){
+				// If this element is part of a radio button group, return the name for that group.
+				return node && node.tagName.toLowerCase() == "input" &&
+					node.type && node.type.toLowerCase() == "radio" &&
+					node.name && node.name.toLowerCase();
+			}
+
+			var shown = a11y._isElementShown, isTabNavigable = a11y.isTabNavigable;
+			var walkTree = function(/*DOMNode*/ parent){
+				for(var child = parent.firstChild; child; child = child.nextSibling){
+					// Skip text elements, hidden elements, and also non-HTML elements (those in custom namespaces) in IE,
+					// since show() invokes getAttribute("type"), which crash on VML nodes in IE.
+					if(child.nodeType != 1 || (has("ie") <= 9 && child.scopeName !== "HTML") || !shown(child)){
+						continue;
+					}
+
+					if(isTabNavigable(child)){
+						var tabindex = +domAttr.get(child, "tabIndex");	// + to convert string --> number
+						if(!domAttr.has(child, "tabIndex") || tabindex == 0){
+							if(!first){
+								first = child;
+							}
+							last = child;
+						}else if(tabindex > 0){
+							if(!lowest || tabindex < lowestTabindex){
+								lowestTabindex = tabindex;
+								lowest = child;
+							}
+							if(!highest || tabindex >= highestTabindex){
+								highestTabindex = tabindex;
+								highest = child;
+							}
+						}
+						var rn = radioName(child);
+						if(domAttr.get(child, "checked") && rn){
+							radioSelected[rn] = child;
+						}
+					}
+					if(child.nodeName.toUpperCase() != 'SELECT'){
+						walkTree(child);
+					}
+				}
+			};
+			if(shown(root)){
+				walkTree(root);
+			}
+			function rs(node){
+				// substitute checked radio button for unchecked one, if there is a checked one with the same name.
+				return radioSelected[radioName(node)] || node;
+			}
+
+			return { first: rs(first), last: rs(last), lowest: rs(lowest), highest: rs(highest) };
+		},
+
+		getFirstInTabbingOrder: function(/*String|DOMNode*/ root, /*Document?*/ doc){
+			// summary:
+			//		Finds the descendant of the specified root node
+			//		that is first in the tabbing order
+			var elems = a11y._getTabNavigable(dom.byId(root, doc));
+			return elems.lowest ? elems.lowest : elems.first; // DomNode
+		},
+
+		getLastInTabbingOrder: function(/*String|DOMNode*/ root, /*Document?*/ doc){
+			// summary:
+			//		Finds the descendant of the specified root node
+			//		that is last in the tabbing order
+			var elems = a11y._getTabNavigable(dom.byId(root, doc));
+			return elems.last ? elems.last : elems.highest; // DomNode
+		}
+	};
+
+	 1  && lang.mixin(dijit, a11y);
+
+	return a11y;
 });
